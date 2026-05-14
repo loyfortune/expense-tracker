@@ -1,0 +1,1 @@
+This is an expense tracker project. It let's users add expenses and income, sort them into relevant categories, and provide relevant insights on various categories such as (such as food, education, bills, et cetera).
