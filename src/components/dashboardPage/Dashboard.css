@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.dashboard {
+  display: block;
+  z-index: 1;
+}
