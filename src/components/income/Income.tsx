@@ -73,7 +73,7 @@ export function Income() {
         </div>
                 <h3>Income</h3>
                 <ul className="list">
-                    {transactions.filter(transaction => transaction.amount > 0 && transaction.category.includes('income')).map(transaction => (<li className='plus'>
+                    {transactions.filter(transaction => transaction.amount > 0).map(transaction => (<li className='plus'>
             <h2>{transaction.category}</h2><span className="list-details">
                  {transaction.text} <span>+${Math.abs(transaction.amount)}</span>
                  </span>
