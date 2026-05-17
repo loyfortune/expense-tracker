@@ -71,7 +71,7 @@ export function Expense() {
         </div>
                 <h3>Expenses</h3>
                 <ul className="list">
-                    {transactions.filter(transaction => transaction.amount < 0 && transaction.category.includes('expense')).map(transaction => (<li className='minus'>
+                    {transactions.filter(transaction => transaction.amount < 0).map(transaction => (<li className='minus'>
             <h2>{transaction.category}</h2><span className="list-details">
                  {transaction.text} <span>-${Math.abs(transaction.amount)}</span>
                  </span>
