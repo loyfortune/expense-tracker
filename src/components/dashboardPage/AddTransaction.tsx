@@ -13,9 +13,9 @@ export function AddTransaction(){
   const [category, setCategory] = useState('');
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
-  const selectTextRef = useRef<HTMLLabelElement>(null);
+  const selectTextRef = useRef<HTMLParagraghElement>(null);
   const arrowImgRef = useRef<HTMLImageElement>(null);
-  const listRef = useRef<HTMLSelectElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
   const { addTransaction } = useContext(GlobalContext);
 
@@ -57,23 +57,21 @@ export function AddTransaction(){
               <form id="form" onSubmit={onSubmit}> 
                 <div className="form-control">
                     <div className="selector">
-                 <label id="selectField" htmlFor="selectField" ref={selectTextRef} onClick={toggleSelectField}>Select Category<img ref={arrowImgRef} src={arrowImage} id="arrowIcon" /></label>
-        <select ref={listRef} className="hide"> 
-          <optgroup label='Income'>
+                 <label htmlFor="selectField">Category</label>
+                        <div id="selectField" onClick={toggleSelectField}> 
+          <p ref={selectTextRef}>Select Category</p>
+          <img ref={arrowImgRef} src={arrowImage} id="arrowIcon" />
+        </div>
+        <ul id='list' ref={listRef} className="hide">
+          <h2>Income</h2>
             {incomeOptions.map((option, index) => (
-              <option key={index} className="options" value={category} onClick={() => handleOptionClick(option)}>
-                <p>{option}</p>
-              </option>
+              <li key={index} className="options" value={category} onClick={() => handleOptionClick(option)}><p>{option}</p></li>
             ))}
-          </optgroup>
-          <optgroup label='Expense'>
+                      <h2>Expense</h2>
             {expenseOptions.map((option, index) => (
-              <option key={index} className="options" value={category} onClick={() => handleOptionClick(option)}>
-                <p>{option}</p>
-              </option>
+              <li key={index} className="options" value={category} onClick={() => handleOptionClick(option)}><p>{option}</p></li>
             ))}
-          </optgroup>
-        </select>
+            </ul>
       </div>
                   <label htmlFor="text">Text</label>
                   <input type="text" id="text" value={text} onChange={(e) => {setText(e.target.value);}} placeholder="Enter text..." />
