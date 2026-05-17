@@ -13,7 +13,7 @@ export function AddTransaction(){
   const [category, setCategory] = useState('');
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
-  const selectTextRef = useRef<HTMLParagraghElement>(null);
+  const selectTextRef = useRef<HTMLParagraphElement>(null);
   const arrowImgRef = useRef<HTMLImageElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
