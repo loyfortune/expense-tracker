@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import { expenseOptions } from "../dashboardPage/AddTransaction";
 import '../dashboardPage/Dashboard.css'
 import '../../App.css';
 import { NavLink } from "react-router";
@@ -15,8 +16,8 @@ export function Income() {
         dashboardElement!.classList.toggle('dashboard');
       }
 
-    const amounts = transactions.map(transaction => transaction.amount);
-    const income = amounts.filter(amount => amount > 0).reduce((acc, amount) => acc + amount, 0);
+    const income = transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => transaction.amount);
+    const totalIncome = income.reduce((acc, item) => (acc += item), 0).toFixed(2)
 
     return(
               <>
@@ -68,17 +69,16 @@ export function Income() {
                   <div className="bg-white p-5 shadow-sm shadow-neutral-700 flex justify-center my-5 mx-0 w-sm lg:w-md">
             <div>
                 <h4>Total Income</h4>
-                <p id="money-plus" className="money plus">+${income}</p>
+                <p id="money-plus" className="money plus">+${totalIncome}</p>
             </div>
         </div>
                 <h3>Income</h3>
                 <ul className="list">
-                    {transactions.filter(transaction => transaction.amount > 0 && transaction.category.includes('income')).map(transaction => (<li className='plus'>
-            <h2>{transaction.category}</h2><span className="list-details">
+                    {transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => (<li className='minus'>
+                      <h2>{transaction.category}</h2><span className="list-details">
                  {transaction.text} <span>+${Math.abs(transaction.amount)}</span>
                  </span>
-        </li>))}
-                
+           </li> ))}
                 </ul>
       </>
     )
