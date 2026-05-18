@@ -2,19 +2,20 @@ import { useRef, useState, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 import arrowImage from '../../assets/arrow.png';
 
-const options = ['Wages/Salary (income)', 'Business Income (income)',
-                 'Tips (income)', 'Other (income)',
-                 'Food (expense)','Bills (expense)',
-                 'Entertainment (expense)', 'Educational (expense)',
-                 'Travel (expense)', 'Miscellaneous (expense)'];
+const incomeOptions = ['Wages/Salary', 'Business Income',
+                 'Tips', 'Other',
+                 ];
+const expenseOptions = ['Food','Bills',
+                 'Entertainment', 'Educational',
+                 'Travel', 'Miscellaneous'];
 
 export function AddTransaction(){
   const [category, setCategory] = useState('');
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
-  const selectTextRef = useRef<HTMLParagraphElement>(null);
+  const selectTextRef = useRef<HTMLLabelElement>(null);
   const arrowImgRef = useRef<HTMLImageElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLSelectElement>(null);
 
   const { addTransaction } = useContext(GlobalContext);
 
@@ -56,17 +57,23 @@ export function AddTransaction(){
               <form id="form" onSubmit={onSubmit}> 
                 <div className="form-control">
                     <div className="selector">
-        <div id="selectField" onClick={toggleSelectField}> 
-          <p ref={selectTextRef}>Select Category</p>
-          <img ref={arrowImgRef} src={arrowImage} id="arrowIcon" />
-        </div>
-        <ul ref={listRef} className="hide">
-            {options.map((option, index) => (
-              <li key={index} className="options" value={category} onClick={() => handleOptionClick(option)}>
+                 <label id="selectField" htmlFor="selectField" ref={selectTextRef} onClick={toggleSelectField}>Select Category<img ref={arrowImgRef} src={arrowImage} id="arrowIcon" /></label>
+        <select ref={listRef} className="hide"> 
+          <optgroup label='Income'>
+            {incomeOptions.map((option, index) => (
+              <option key={index} className="options" value={category} onClick={() => handleOptionClick(option)}>
                 <p>{option}</p>
-              </li>
+              </option>
             ))}
-        </ul>
+          </optgroup>
+          <optgroup label='Expense'>
+            {expenseOptions.map((option, index) => (
+              <option key={index} className="options" value={category} onClick={() => handleOptionClick(option)}>
+                <p>{option}</p>
+              </option>
+            ))}
+          </optgroup>
+        </select>
       </div>
                   <label htmlFor="text">Text</label>
                   <input type="text" id="text" value={text} onChange={(e) => {setText(e.target.value);}} placeholder="Enter text..." />
