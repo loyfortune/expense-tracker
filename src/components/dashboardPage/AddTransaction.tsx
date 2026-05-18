@@ -5,11 +5,7 @@ import arrowImage from '../../assets/arrow.png';
 const incomeOptions = ['Wages/Salary', 'Business Income',
                  'Tips', 'Other',
                  ];
-<<<<<<< HEAD
 export const expenseOptions = ['Food','Bills',
-=======
-const expenseOptions = ['Food','Bills',
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
                  'Entertainment', 'Educational',
                  'Travel', 'Miscellaneous'];
 
@@ -77,29 +73,16 @@ export function AddTransaction(){
             ))}
             </ul>
       </div>
-<<<<<<< HEAD
                   <label htmlFor="text">Description</label>
-=======
-                  <label htmlFor="text">Text</label>
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
                   <input type="text" id="text" value={text} onChange={(e) => {setText(e.target.value);}} placeholder="Enter text..." />
                 </div>
                 <div className="form-control">
                   <label htmlFor="amount"
-<<<<<<< HEAD
                     >Amount</label>
-=======
-                    >Amount <br />
-                    (negative - expense, positive - income)</label>
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
                   <input type="number" id="amount" value={amount} onChange={(e) => {setAmount(e.target.valueAsNumber);}} placeholder="Enter amount..." />
                   </div>
                 <button className="btn">Add transaction</button>
               </form>
         </>
     );
-<<<<<<< HEAD
   }
-=======
-  }
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71

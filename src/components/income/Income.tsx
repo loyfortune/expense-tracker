@@ -1,9 +1,6 @@
 import { useContext, useRef } from "react";
 import { GlobalContext } from "../../context/GlobalState";
-<<<<<<< HEAD
 import { expenseOptions } from "../dashboardPage/AddTransaction";
-=======
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
 import '../dashboardPage/Dashboard.css'
 import '../../App.css';
 import { NavLink } from "react-router";
@@ -19,13 +16,8 @@ export function Income() {
         dashboardElement!.classList.toggle('dashboard');
       }
 
-<<<<<<< HEAD
     const income = transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => transaction.amount);
     const totalIncome = income.reduce((acc, item) => (acc += item), 0).toFixed(2)
-=======
-    const amounts = transactions.map(transaction => transaction.amount);
-    const income = amounts.filter(amount => amount > 0).reduce((acc, amount) => acc + amount, 0);
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
 
     return(
               <>
@@ -77,16 +69,11 @@ export function Income() {
                   <div className="bg-white p-5 shadow-sm shadow-neutral-700 flex justify-center my-5 mx-0 w-sm lg:w-md">
             <div>
                 <h4>Total Income</h4>
-<<<<<<< HEAD
                 <p id="money-plus" className="money plus">+${totalIncome}</p>
-=======
-                <p id="money-plus" className="money plus">+${income}</p>
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
             </div>
         </div>
                 <h3>Income</h3>
                 <ul className="list">
-<<<<<<< HEAD
                     {transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => (<li className='minus'>
                       <h2>{transaction.category}</h2><span className="list-details">
                  {transaction.text} <span>+${Math.abs(transaction.amount)}</span>
@@ -96,15 +83,3 @@ export function Income() {
       </>
     )
 }
-=======
-                    {transactions.filter(transaction => transaction.amount > 0).map(transaction => (<li className='plus'>
-            <h2>{transaction.category}</h2><span className="list-details">
-                 {transaction.text} <span>+${Math.abs(transaction.amount)}</span>
-                 </span>
-        </li>))}
-                
-                </ul>
-      </>
-    )
-}
->>>>>>> 6c7894ef7d0009db901780c5d81984c5fd14ab71
