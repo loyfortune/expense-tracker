@@ -21,9 +21,29 @@ body {
   font-size: 18px;
 }
 
+/*Here*/
 .container {
-  margin: 30px auto;
-  width: 400px;
+  margin: 20px auto;
+  width: 300px;
+}
+
+@media screen and (min-width: 375px) {
+  .container {
+    width: 355px;
+  }
+}
+
+@media screen and (min-width: 414px) {
+  .container {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    margin: 30px auto;
+    width: 450px;
+  }
 }
 
 h1 {

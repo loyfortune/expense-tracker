@@ -12,9 +12,9 @@ export function Dashboard() {
 
     return(
       <>
-            <div ref={dashboardRef} className="fixed left-0 top-0 h-screen w-3xs bg-gray-800 hidden lg:block">
+            <div ref={dashboardRef} className="fixed left-0 top-0 h-screen w-50 sm:w-2xs bg-gray-800 hidden lg:block">
       <div className="flex gap-x-2 items-center justify-center mt-7">
-        <span className="text-2xl text-white font-semibold">MyExpense Tracker</span>
+        <span className="text-lg sm:text-2xl text-white font-semibold">MyExpense Tracker</span>
       </div>
       <div className="mt-10 space-y-4">
         <NavLink
