@@ -249,10 +249,9 @@ input[type="number"] {
 
 .add-btn {
   position: fixed;
-  bottom: 10px;
+  bottom: 12px;
   right: 5px;
-  width: 50px;
-  height: 50px;
-  color: #765aff;
+  color: #6a4cff;
   cursor: pointer;
+  z-index: 1;
 }
