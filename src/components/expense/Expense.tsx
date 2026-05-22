@@ -105,8 +105,9 @@ export function Expense() {
               ></path>
             </svg>
           </button>
+          <div className='my-7.5 mx-auto w-75 sm:w-100 md:w-112.5'>
           <h2 className="header">Expense Tracker</h2>
-                  <div className="bg-white p-4 rounded-sm shadow-sm shadow-neutral-400 flex items-center justify-center my-5 mx-0 w-sm lg:w-md">
+                  <div className="bg-white p-4 rounded-sm shadow-sm shadow-neutral-400 flex items-center justify-center my-5 w-full">
             <div>
                 <h4>Total Expense</h4>
                 <p id="money-minus" className="money minus">-${totalExpense}</p>
@@ -146,6 +147,7 @@ export function Expense() {
                   </div>
                 <button className="btn">Add transaction</button>
               </form>
+              </div>
       </>
     )
 }

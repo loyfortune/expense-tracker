@@ -5,9 +5,14 @@ import { NavLink } from 'react-router';
 export function Dashboard() {
   const dashboardRef = useRef<HTMLDivElement>(null);
 
-  function displayDashboard(){
+  function toggleDashboardDisplay(){
     const dashboardElement = dashboardRef.current;
     dashboardElement!.classList.toggle('dashboard');
+  }
+
+    function displayDashboard(){
+    const dashboardElement = dashboardRef.current;
+    dashboardElement!.classList.add('dashboard');
   }
 
     return(
@@ -39,7 +44,7 @@ export function Dashboard() {
           <span>Support</span></NavLink>
       </div>
     </div>
-    <button onClick={displayDashboard} className="absolute right-4 top-4 text-gray-500 focus:outline-none lg:hidden cursor-pointer"
+    <button onClick={toggleDashboardDisplay} className="absolute right-4 top-4 text-gray-500 focus:outline-none lg:hidden cursor-pointer"
           >
             <svg
               className="w-6 h-6"
@@ -56,6 +61,12 @@ export function Dashboard() {
               ></path>
             </svg>
           </button>
+                  <div className="add-btn" onClick={displayDashboard}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24">
+	    <path d="M0 0h24v24H0z" fill="none" />
+	    <path fill="currentColor" fill-rule="evenodd" d="M2 11.999c0-5.523 4.477-10 10-10s10 4.477 10 10s-4.477 10-10 10s-10-4.477-10-10M12 8a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0v-2H9a1 1 0 1 1 0-2h2V9a1 1 0 0 1 1-1" clip-rule="evenodd" />
+        </svg>
+        </div>
       </>
     );
 }

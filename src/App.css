@@ -246,3 +246,13 @@ input[type="number"] {
 .rotate {
   transform: rotate(180deg);
 }
+
+.add-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  color: #765aff;
+  cursor: pointer;
+}
