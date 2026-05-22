@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
-import { expenseOptions } from "./AddTransaction";
+import { expenseOptions } from "../expense/Expense";
 
 
 type TransactionPropType = {id: number, category: string, text: string, amount: number};

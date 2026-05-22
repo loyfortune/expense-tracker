@@ -1,23 +1,66 @@
-import { useContext, useRef } from "react";
-import { GlobalContext } from "../../context/GlobalState";
-import { expenseOptions } from "../dashboardPage/AddTransaction";
+import { useRef, useState, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalState';
+import { expenseOptions } from "../expense/Expense";
+import { NavLink } from "react-router";
 import '../dashboardPage/Dashboard.css'
 import '../../App.css';
-import { NavLink } from "react-router";
+import arrowImage from '../../assets/arrow.png';
 
+const incomeOptions = ['💰Wages/Salary', '🤝Business Income',
+                 '💵Tips', 'Other',
+                 ];
 
 export function Income() {
-    const  { transactions } = useContext(GlobalContext);
+  const [category, setCategory] = useState('');
+  const [text, setText] = useState('');
+  const [amount, setAmount] = useState(0);
+  const selectTextRef = useRef<HTMLParagraphElement>(null);
+  const arrowImgRef = useRef<HTMLImageElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
 
-      const dashboardRef = useRef<HTMLDivElement>(null);
+  const { addTransaction, deleteTransaction } = useContext(GlobalContext);
+  const  { transactions } = useContext(GlobalContext);
     
-      function displayDashboard(){
-        const dashboardElement = dashboardRef.current;
-        dashboardElement!.classList.toggle('dashboard');
-      }
+  function displayDashboard(){
+    const dashboardElement = dashboardRef.current;
+    dashboardElement!.classList.toggle('dashboard');
+  }
 
-    const income = transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => transaction.amount);
-    const totalIncome = income.reduce((acc, item) => (acc += item), 0).toFixed(2)
+  const income = transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => transaction.amount);
+  const totalIncome = income.reduce((acc, item) => (acc += item), 0).toFixed(2)
+
+  function toggleSelectField(){
+    const arrowImgElement = arrowImgRef.current;
+    const listElement = listRef.current;
+
+    listElement!.classList.toggle('hide');
+    arrowImgElement!.classList.toggle('rotate');
+  };
+
+  const handleOptionClick = (text: string) => {
+    const selectTextElement = selectTextRef.current;
+    const listElement = listRef.current;
+    const arrowImgElement = arrowImgRef.current;
+
+    selectTextElement!.innerHTML = text;
+    listElement!.classList.add('hide');
+    arrowImgElement!.classList.toggle('rotate');
+    setCategory(text);
+  };
+
+  const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTransaction = {
+      id: Math.floor(Math.random() * 100000000),
+      category,
+      text,
+      amount
+    }
+
+    addTransaction(newTransaction);
+  }
 
     return(
               <>
@@ -65,8 +108,8 @@ export function Income() {
               ></path>
             </svg>
           </button>
-                    <h2 className="header">Expense Tracker</h2>
-                  <div className="bg-white p-5 shadow-sm shadow-neutral-700 flex justify-center my-5 mx-0 w-sm lg:w-md">
+        <h2 className="header">Expense Tracker</h2>
+        <div className="bg-white p-4 rounded-sm shadow-sm shadow-neutral-400 flex items-center justify-center my-5 mx-0 w-sm lg:w-md">
             <div>
                 <h4>Total Income</h4>
                 <p id="money-plus" className="money plus">+${totalIncome}</p>
@@ -74,12 +117,38 @@ export function Income() {
         </div>
                 <h3>Income</h3>
                 <ul className="list">
-                    {transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => (<li className='minus'>
+                    {transactions.filter(transaction => !expenseOptions.includes(transaction.category)).map(transaction => (<li className='plus'>
                       <h2>{transaction.category}</h2><span className="list-details">
                  {transaction.text} <span>+${Math.abs(transaction.amount)}</span>
+                 <button className="delete-btn" onClick={() => deleteTransaction(transaction.id)}>x</button>
                  </span>
            </li> ))}
                 </ul>
+                <h3>Add new transaction</h3>
+              <form id="form" onSubmit={onSubmit}> 
+                <div className="form-control">
+                    <div className="selector">
+                 <label htmlFor="selectField">Category</label>
+                        <div id="selectField" onClick={toggleSelectField}> 
+          <p ref={selectTextRef}>Select Category</p>
+          <img ref={arrowImgRef} src={arrowImage} id="arrowIcon" />
+        </div>
+        <ul id='list' ref={listRef} className="hide">
+            {incomeOptions.map((option, index) => (
+              <li key={index} className="options" value={category} onClick={() => handleOptionClick(option)}><p>{option}</p></li>
+            ))}
+            </ul>
+      </div>
+                  <label htmlFor="text">Description</label>
+                  <input type="text" id="text" value={text} onChange={(e) => {setText(e.target.value);}} placeholder="Enter text..." />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="amount"
+                    >Amount</label>
+                  <input type="number" id="amount" value={amount} onChange={(e) => {setAmount(e.target.valueAsNumber);}} placeholder="Enter amount..." />
+                  </div>
+                <button className="btn">Add transaction</button>
+              </form>
       </>
     )
 }

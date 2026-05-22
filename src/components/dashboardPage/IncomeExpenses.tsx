@@ -1,7 +1,7 @@
 
 import { useContext } from "react"
 import { GlobalContext } from "../../context/GlobalState"
-import { expenseOptions } from "./AddTransaction";
+import { expenseOptions } from "../expense/Expense";
 
 export function IncomeExpenses() {
     const { transactions } = useContext(GlobalContext);
@@ -14,11 +14,11 @@ export function IncomeExpenses() {
     return (
         <div className="inc-exp-container">
             <div>
-                <h4>Income</h4>
+                <h4>📈Income</h4>
                 <p id="money-plus" className="money plus">+${totalIncome}</p>
             </div>
             <div>
-                <h4>Expense</h4>
+                <h4>📉Expense</h4>
                 <p id="money-minus" className="money minus">-${totalExpense}</p>
             </div>
         </div>
